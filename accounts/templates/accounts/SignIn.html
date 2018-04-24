@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+<!doctype html>
+<html lang="en">
+  <head>
+    {% block headTitle %}<title>Sign In</title> {% endblock %}
+  </head>
+  <body>
+  {% block body %}
+   <div class="container">
+        <h3>Sign In</h3>
+        <form  method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+        <button type="submit" class="btn btn-outline-info ">Submit</button>
+        <a href="{% url 'password_reset' %}" class="btn btn-outline-warning">Forget Passowrd</a>
+        </form>
+
+         <hr>
+            <h5 class="text-center">OR</h5>
+            <div class="container text-center">
+            <a href="{% url 'social:begin' 'google-oauth2' %}", role="button", class="btn btn-outline-secondary">Sign In With Google</a>
+            <a href="{% url 'social:begin' 'facebook-oauth2' %}", role="button", class="btn btn-outline-primary">Sign In With Facebook</a>
+            </div>
+    </div>
+  {% endblock %}
+  </body>
+</html>

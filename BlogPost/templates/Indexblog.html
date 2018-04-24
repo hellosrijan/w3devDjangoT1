@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block headTitle %}
+    <title>Blog</title>
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <div class="container">
+    <h4 class="display-3">Welcome to Our Blog</h4>
+    {% for post in blogPost %}
+        <a href="/Blog/Details/{{ post.id }}" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1" style="color: darkcyan">{{ post.title }}</h5>
+        <small>Post Date: {{ post.created_at }}  &nbsp; &nbsp; &nbsp; &nbsp;   Last Updated: {{ post.updated_at }}</small>
+        </div>
+        <p class="mb-1">{{ post.content | truncatewords:50 }}</p>
+        <small>{{ post.blog_creator.first_name }} {{ post.blog_creator.last_name }}</small>
+        </a>
+    {% endfor %}
+    </div>
+{% endblock %}
+</body>
+</html>

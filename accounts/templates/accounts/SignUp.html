@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block headTitle %}<title>W3Dev | Join Our Community</title> {% endblock %}
+</head>
+<body>
+{% block body %}
+    <div class="container">
+    <br>
+    <h2 class="text-center">Sign Up !</h2><br>
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-outline-success">Sign Up</button>
+    </form>
+    <hr>
+    <h5 class="text-center">OR</h5>
+     <a href="{% url 'social:begin' 'google-oauth2' %}", role="button", class="btn btn-outline-secondary">Sign In With Google</a>
+      <a href="{% url 'social:begin' 'facebook-oauth2' %}", role="button", class="btn btn-outline-primary">Sign In With Facebook</a>
+    </div>
+{% endblock %}
+</body>
+</html>

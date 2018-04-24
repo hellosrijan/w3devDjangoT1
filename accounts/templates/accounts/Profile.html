@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block headTitle %}
+    <title>Title</title>
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <div class="container">
+    {% if user.is_authenticated %}
+             <p class="display-4">Hello, {{ user.username }}</p>
+	{% else %}
+             <a class="lead" href="{% url 'SignIn' %}">SignIn</a></a>
+	{% endif %}
+    <p>
+    {{ user }}
+        First Name  :   {{ user.first_name }} <br>
+        Last Name   :     {{ user.last_name }} <br>
+        User Email  :    {{ user.email }}
+    </p>
+
+    </div>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block headTitle %}
+    <title>Create Post</title>
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <div class="container">
+    <br>
+    <form method="post" class="form-row ">
+        {% csrf_token %}
+        <div class="container">
+        <table class="table table-striped">
+            <tr>
+                <td >Title :</td>
+                <td>{{ form.title }}</td>
+            </tr>
+            <tr>
+                <td>Content : </td>
+                <td>{{ form.content }}</td>
+            </tr>
+        </table>
+        <br>
+        <input class="btn btn-primary" type="submit" value="Submit">
+        </div>
+    </form>
+    </div>
+{% endblock %}
+</body>
+</html>

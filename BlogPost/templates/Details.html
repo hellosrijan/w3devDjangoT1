@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block headTitle %}
+    <title>Blog</title>
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <div class="container">
+    <h3>{{ post.title }}</h3><br>
+    <p> Created Date : {{ post.created_at }}</p>
+    <p> {{ post.content }}</p>
+    </div>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block headTitle %}
+    <title>Delete Post</title>
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    {% if user.is_authenticated %}
+             <p class="display-4">Hey! {{ user.username }}</p>
+	{% else %}
+             <a class="lead" href="{% url 'SignIn' %}">SignIn</a>
+	{% endif %}
+
+    <div class="col-xs-12">
+    {% if message %}
+        {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                 Your Post Has Been <strong>Deleted Sucessfully !</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                 </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    </div>
+
+
+    <div class="container">
+    <p class="display-4">Your Remaining Post</p>
+    {% if user.is_authenticated %}
+    {% for post in posts %}
+         <a href="/Blog/Details/{{ post.id }}" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1" style="color: darkcyan">{{ post.title }}</h5>
+            <small>Post Date: {{ post.created_at }}  &nbsp; &nbsp; &nbsp; &nbsp;   Last Updated: {{ post.updated_at }}</small>
+        </div>
+        <p class="mb-1">{{ post.content | truncatewords:100 }}</p>
+        <small>{{ post.blog_creator.first_name }} {{ post.blog_creator.last_name }}</small>
+         <a class="btn btn-secondary btn-sm" href="/BlogPost/MyPost/EditPost/{{ post.id }}">Edit</a>
+        </a>
+        <br><br>
+    {% endfor %}
+    {% endif%}
+{% endblock %}
+</body>
+</html>

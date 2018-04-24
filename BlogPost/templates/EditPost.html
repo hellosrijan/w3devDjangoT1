@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block headTitle %}
+    <title>Edit Post</title>
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+     {% if user.is_authenticated %}
+             <p class="display-4">Hey, {{ user.username }}</p>
+	{% else %}
+             <a class="lead" href="{% url 'SignIn' %}">SignIn</a>
+	{% endif %}
+
+
+    <div class="container">
+     <div class="col-xs-12">
+    {% if message %}
+        {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                 Your Post Has Been <strong>Save Sucessfully !</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                 </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    </div>
+    <br>
+       <div class="container">
+    <br>
+    <form method="post" class="form-row ">
+        {% csrf_token %}
+        <div class="container">
+        <table class="table table-striped">
+            <tr><td >Title : {{ post.title }}</td><br></tr>
+            <tr><td>Enter Updated Title : {{ form.title }}</td></tr>
+            <tr><td>Content :</td></tr>
+            <tr><td>{{ post.content }}</td></tr>
+            <tr><td>Enter Updated Content</td></tr>
+            <tr><td>{{ form.content }}</td></tr>
+        </table>
+        <br>
+        <input class="btn btn-primary" type="submit" value="Update">
+        </div>
+    </form>
+    </div>
+    </div>
+{% endblock %}
+</body>
+</html>
