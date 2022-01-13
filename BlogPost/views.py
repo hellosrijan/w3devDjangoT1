@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.http import Http404
-from django.shortcuts import render, redirect, render_to_response
+from django.shortcuts import render
 from .models import BlogPost
 from .form import BlogPostForm
 from django.contrib import messages

@@ -84,11 +84,11 @@ WSGI_APPLICATION = 'w3devDjangoT1.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # MySql
-        'NAME': 'w3devDjangoT1',  # use create Database w3devDjangoT1 in sql terminal
-        'USER': 'w3devuser',      # create a new user via root login of your workbench
-        'PASSWORD': 'w3devDjangoT1',
-        'HOST': '',
-        'PORT': '',
+        'NAME': 'w3dev_django_t1',  # use create Database w3devDjangoT1 in sql terminal
+        'USER': 'root',      # create a new user via root login of your workbench
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -113,10 +113,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Social_django authentication backends
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.open_id.OpenIdAuth',  # For Google Authentication
-    'social_core.backends.google.GoogleOpenId',  # For Google Authentication
+    # 'social_core.backends.open_id.OpenIdAuth',  # For Google Authentication
     'social_core.backends.google.GoogleOAuth2',  # For Google Authentication
-    'social_core.backends.google.GoogleOAuth',   # for Google Authentication
+    # 'social_core.backends.google.GoogleOAuth',   # for Google Authentication
     'social_core.backends.twitter.TwitterOAuth',  # For Twitter Authenticaiton
     'social_core.backends.facebook.FacebookOAuth2',   # For Facebook Authentication
 
@@ -145,12 +144,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
-STATIC_DIRS = '/static/'
-
-STATICFILES_DIRS = [
-    STATIC_DIRS
-]
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Login Redirected Urls
 LOGIN_URL = '/SignIn'
@@ -165,3 +160,6 @@ EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 1025
 EMAIL_USE_TLS = False
+
+
+

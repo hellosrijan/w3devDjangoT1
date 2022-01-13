@@ -16,34 +16,34 @@ Including another URLconf
 
 from django.urls import path, re_path, include
 from . import views
-from django.contrib.auth.views import (
-    login,
-    logout,
-    password_reset,
-    password_reset_done,
-    password_reset_confirm,
-    password_reset_complete
-    )
+from django.contrib.auth.views import PasswordResetView, PasswordChangeDoneView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView, LoginView, LogoutView, PasswordChangeView
+
+
 urlpatterns = [
     path('', views.accounts, name='accounts'),
-    re_path(r'^SignIn/$', login, {'template_name': 'accounts/SignIn.html'}, name='SignIn'),
-    re_path(r'^auth/', include('social_django.urls', namespace='social')),
-    re_path(r'^SignOut/$', logout, {'template_name': 'accounts/SignOut.html'}, name='SignOut'),
-    re_path(r'^SignUp/$', views.signup, name='SignUp'),
-    re_path(r'^Profile/$', views.view_profile, name='view_profile'),
-    re_path(r'^Profile/Edit/$', views.edit_profile, name='edit_profile'),
-    re_path(r'^ChangePassword/$', views.change_password, name='change_password'),
-    re_path(r'^ResetPassword/$', password_reset,
+    path('signin/', LoginView.as_view(template_name='accounts/SignIn.html'), name='SignIn'),
+    path('auth/', include('social_django.urls', namespace='social')),
+    path('signout/', LogoutView.as_view(template_name='accounts/SignOut.html'), name='SignOut'),
+    path('signup/', views.signup, name='SignUp'),
+    path('profile/', views.view_profile, name='view_profile'),
+    path('profile/edit/', views.edit_profile, name='edit_profile'),
+    path('change/password/', PasswordChangeView.as_view(template_name='accounts/ChangePassword.html'), name='change_password'),
+    path('change/password/done/', PasswordChangeDoneView.as_view(template_name='accounts/ResetPasswordConfirm.html'), name='password_change_done'),
+
+    path('reset/password/', PasswordResetView.as_view(),
             {'template_name': 'accounts/ResetPassword.html'},
             name='password_reset'),
-    re_path(r'^ResetPassword/Done/$', password_reset_done,
+
+    path('reset/password/done/$', PasswordResetDoneView.as_view(),
             {'template_name': 'accounts/ResetPasswordSent.html'},
             name='password_reset_done'),
-    re_path(r'^ResetPassword/Confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-            password_reset_confirm,
+            
+    path('reset/rassword/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+            PasswordResetConfirmView.as_view(),
             {'template_name': 'accounts/ResetPasswordConfirm.html'},
             name='password_reset_confirm'),
-    re_path(r'^ResetPassword/Complete/$', password_reset_complete,
+
+    path('reset/password/complete/', PasswordResetCompleteView.as_view(),
             {'template_name': 'accounts/ResetPasswordComplete.html'},
             name='password_reset_complete'),
 ]
